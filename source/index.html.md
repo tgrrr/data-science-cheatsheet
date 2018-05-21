@@ -1,11 +1,10 @@
 ---
-title: API Reference
+title: Data Science Cheatsheet
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
-  - ruby
+  - R
   - python
-  - javascript
 
 toc_footers:
   - <a href='#'>Sign Up for a Developer Key</a>
@@ -17,19 +16,93 @@ includes:
 search: true
 ---
 
-# Introduction
+# Data Science Cheatsheet
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+tldr version of common data science concepts and code
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+# 8. Hypothesis testing
 
-This example API documentation page was created with [Slate](https://github.com/lord/slate). Feel free to edit it and use it as a base for your own API's documentation.
+<!-- TODO: -->
+
+## Null Hypothesis Significance Testing (NHST)
+
+H<sub>0</sub> : - null hypothesis
+
+H<sub>a</sub> : - alternative
+
+- Explain the process and logic of Null Hypothesis Significance Testing (NHST).
+- Define one-tailed and two-tailed hypothesis testing.
+- State and test the assumptions behind the different t-tests.
+
+
+### H<sub>0</sub> Null hypothesis
+
+*Eg. The population mean IQ score is 100.*
+
+H<sub>0</sub>: µ > µ0
+
+- H<sub>0</sub>: State an assumption about the world
+- That is bleak and uninteresting. It's the status quo. Nothing is happening.
+
+### H<sub>a</sub> Alternate hypothesis
+
+*eg. The population mean IQ scores are not 100*
+
+- H<sub>a</sub> contradicts and rejects H<sub>0</sub>
+- Next, we state an opposing viewpoint that contradicts H0
+- To support HA we must rule out H0 beyond a reasonable doubt
+
+## One tailed t-tests
+
+- Determine when a one-sample t-test should be applied.
+- Use technology to compute and interpret a `one-sample t-test`.
+
+## Two sample t-tests
+
+## Paired sample t-tests
+
+- Identify and distinguish between the two-sample and paired sample research designs for continuous variables.
+- Use technology to compute a two-sample (independent samples) t-test and paired-samples (dependent samples) t-test.
+- Interpret a `two-sample` and `paired-samples t-test`.
+
+#### One sided test
+
+- H<sub>0</sub>: µ > µ0
+- H<sub>0</sub>: (mean) > (mean)0
+
+*or*
+
+#### Two sided test
+H<sub>a</sub> : : µ ≠ µ0
+
+## P value
+
+If P is very small
+
+We reject H<sub>0</sub>
+
+and then: H<sub>a</sub> is significant
+
+```shell
+P-value = p = Pr(x̄ < 36.81|μ = 37)
+
+pt(t,df=n-1)
+
+`P-value = p = Pr(t < 5.83|t = 0) + Pr(t > 5.83|t = 0)`
+
+```
+
+# Latin Terms
+- ɑ significance
+- µ mean
+- P proportion
+
 
 # Authentication
 
 > To authorize, use this code:
 
-```ruby
+```R
 require 'kittn'
 
 api = Kittn::APIClient.authorize!('meowmeowmeow')
@@ -69,7 +142,7 @@ You must replace <code>meowmeowmeow</code> with your personal API key.
 
 ## Get All Kittens
 
-```ruby
+```R
 require 'kittn'
 
 api = Kittn::APIClient.authorize!('meowmeowmeow')
@@ -135,7 +208,7 @@ Remember — a happy kitten is an authenticated kitten!
 
 ## Get a Specific Kitten
 
-```ruby
+```R
 require 'kittn'
 
 api = Kittn::APIClient.authorize!('meowmeowmeow')
@@ -189,7 +262,7 @@ ID | The ID of the kitten to retrieve
 
 ## Delete a Specific Kitten
 
-```ruby
+```R
 require 'kittn'
 
 api = Kittn::APIClient.authorize!('meowmeowmeow')
@@ -236,4 +309,3 @@ This endpoint deletes a specific kitten.
 Parameter | Description
 --------- | -----------
 ID | The ID of the kitten to delete
-
