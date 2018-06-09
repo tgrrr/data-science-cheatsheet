@@ -16,7 +16,6 @@ includes:
   - stats-notes-final-exam
   - stats-intro-math1324
   - data-preprocessing
-  - errors
   
 search: true
 ---
