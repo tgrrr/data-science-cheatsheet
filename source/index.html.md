@@ -15,7 +15,9 @@ toc_footers:
 includes:
   - stats-notes-final-exam
   - stats-intro-math1324
+  - stats-verity-notes
   - data-preprocessing
+  
   
 search: true
 ---

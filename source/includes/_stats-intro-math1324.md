@@ -2,7 +2,7 @@
 
 ## Jargon and latin terms (TODO)
 
-# Latin Terms
+## Latin Terms
 - ɑ = significance level
 - µ = mean
 - P = proportion
@@ -19,8 +19,8 @@
 
 ########################################################
 
-# Confidence Intervals
-# Module 6 - Estimating Uncertainty Confidently
+## Confidence Intervals
+## Module 6 - Estimating Uncertainty Confidently
 
 Menu
 - Confidence intervals population known
@@ -28,7 +28,7 @@ Menu
 - Confidence intervals proportions
 - Confidence intervals rates
 
-# tldr steps
+## tldr steps
 1. Get sample mean
 x̄(X̄
 2. Do we know the Population standard deviation σ ? , or unknown, s.
@@ -197,7 +197,7 @@ There are three related ways for doing this:
 - Confidence Interval (normally 95%) - How confident we are that if we re-sampled the population, we would get same results
 - s = sample standard deviation
 
-# Approaches
+## Approaches
 
 ## Critical value Approach
 - Dont know Pop standard deviation ( σ)
@@ -315,7 +315,7 @@ P-value = p = Pr(t < 5.83|t = 0) + Pr(t > 5.83|t = 0)
 
 ```
 
-# Samples
+## Samples
 
 ## 1 sample t-test (TODO)
 - maths
@@ -342,7 +342,7 @@ _______________________________________
 
 Notes from class while trying to do ass3
 
-# from class: divide mean or something by square root of
+## from class: divide mean or something by square root of
 
 From class notes
 ```R
@@ -407,7 +407,7 @@ TODO:
 -
 
 ```R
-# qnorm(body)
+## qnorm(body)
 favstats(~BFP_Brozek, data = body, groups = Sex)
 
 ```
@@ -431,7 +431,7 @@ body_fat_male
 qqPlot(body_fat_male$Sex, dist="norm")
 
   leveneTest(body ~ Sex, data = body)
-# leveneTest(Pulses ~ Brand, data = Battery_sub)
+## leveneTest(Pulses ~ Brand, data = Battery_sub)
 
  leveneTest(BFP_Brozek, data = body)
   
@@ -459,7 +459,7 @@ LECTURE NOTES BELOW HERE
 ____________________________________________
 
 
-# Lecture notes: Module 7: Testing the Null: Data on Trial
+## Lecture notes: Module 7: Testing the Null: Data on Trial
 
 ### CONTENTS
 1 Module 7: Testing the Null: Data on Trial
