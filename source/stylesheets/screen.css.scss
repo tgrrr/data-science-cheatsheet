@@ -75,11 +75,7 @@ html, body {
   .logo {
     display: block;
     max-width: 100%;
-    margin-bottom: $logo-margin;
-    // margin-left: auto;
-    // width: 107px;
-    // left: 0;
-    // right: 0;
+    margin: $logo-margin auto;
   }
 
   &>.search {
@@ -278,6 +274,7 @@ html, body {
     position: fixed;
     z-index: 50;
     border-bottom: 5px solid $lang-select-active-bg;
+    top: 0;
   }
 }
 

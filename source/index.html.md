@@ -8,8 +8,8 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - tex
 
 toc_footers:
-  - <a href='http://botbotdot.com'>Built by Phil at Botbotdot.com</a>
-  
+  - <a href='#'>Built by Phil at botbotdot.com</a>
+  - <a href='http://botbotdot.com'>Botbotdot.com - automation</a>
   - <a href='https://github.com/tgrrr/data-science-cheatsheet/tree/master/source/howto/how-to-contribute.md'>Contributions welcome!</a>
 
 includes:
@@ -20,7 +20,7 @@ includes:
 search: true
 ---
 
-## Cheatsheet - Data Science - too long; didn't do
+#### Cheatsheet - Data Science - too long; didn't do
 
 tl;dd: common data science concepts and code
 
