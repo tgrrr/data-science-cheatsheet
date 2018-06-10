@@ -1,51 +1,52 @@
 # STATS NOTES FINAL EXAM - modules
 
-TODO:
-
-[] Copy stats symbols accross
-
-
 # 1. Types of variables
 
-### Qualitative - category, values or %
-  - Categorical
-  - Yes/ no
-  - Describe by values or percentages
+**Qualitative** - category, values or percentage %
 
-### Quantitative - count or interval
-- Discrete = countable
+- Categorical
+- Yes/ no
+- Describe by values or percentages
+
+**Quantitative** - count or interval
+
+Discrete = countable
   - Countable
   - Finite number of variables
-- Continuous = interval
+
+Continuous = interval
   - Measurement falls into an interval
   - eg. Time or Height
 
-### Nominal -> categorical
-- no meaningful difference between categories
+**Nominal** - aka categorical
 
-### Ordinal -> rank
+no meaningful difference between categories
 
-### Interval -> equal interval
-- Eg. Temperature
+**Ordinal** - rank
 
-### Ratio -> has absolute zero
-- Height
+**Interval** - equal interval
 
-### TODO: Design of analysis
+Eg. Temperature
+
+**Ratio** - has absolute zero
+
+Eg. Height
+
+TODO:
+
+- Design of analysis
 
 # 2 Summarising data
 
-## Summarising data
-
 - Graphical
 - Numerical
-  - ?Measures of central tendency
+  - Measures of central tendency
 
-## ? Measures of central tendency
+## Measures of central tendency
 
 - ? Location of data
 - Quantitative data
-- Mean (ẍ - should be x bar but couldn’t find the simple)
+- Mean (x̅)
   - Sensitive to each individual data value
   - Outliers
 - Median
@@ -79,13 +80,17 @@ TODO:
 
 ### IQR
 - Range of the middle 50% of data
-- Q3 – Q1
-
-### Outlier
-- TODO: Any values less than Q1 – 1.5IQR or more than Q3 – 1.5IQR
 
 ```
-Q1 – 1.5IQR or more than Q3 – 1.5IQR
+IQR <- Q3 – Q1
+```
+
+### Outlier
+
+```
+outliers < Q1 – 1.5IQR
+# or
+outliers > Q3 – 1.5IQR
 ```
 
 ### Boxplot - Is data symmetric?
@@ -100,243 +105,356 @@ Q1 – 1.5IQR or more than Q3 – 1.5IQR
   - Or largest Q3, etc
 
 ### Skew
-- Positive skew – mean greater than median
-- Negative skew – mean less than median
+
+> Positive skew
+
+```
+mean > median
+```
+
+> Negative skew
+
+```
+mean < median
+```
 
 # 3. TODO: Probability using contingency table
 
+[] Copy stats symbols across
+
+
+
+
 ## TODO: Probability using contingency table
 ## TODO: Events occurrence
-## TODO: Mutually exclusive event
-## TODO: Union
-## TODO: Intersection
-## TODO: Conditional probability
 
+## Intersection (AND)
 
-# 4. TODO: Binomial distribution
+- Mutually exclusive event
+```
+Pr(  ∩  ) => mutually exclusive
+```
 
-## TODO: Binomial distribution
-- When outcome of each experiment is only two options
+## Union (OR)
+
+```
+Pr(1 serve ∪ < 1 serve)
+```
+
+## Conditional probability (given)
+
+Pr(B|A) => conditional probability of B given A
+The two events A and B are independent if and only if
+
+> independent IF
+
+```r
+Pr(A|B) = Pr(A)
+# OR
+Pr(B|A) = Pr(B)
+```
+
+## Permutations
+
+```r
+factorial(6)/factorial(6-3)
+> [1] 120
+```
+
+## Combinations
+
+```r
+choose(10,4)
+> [1] 210
+```
+
+# 4. Binomial distribution
+
+```r
+binom(numberOfTrials,probability)
+```
+
+*Applies to discreet variables only*
+
+- = bi => only 2 options for the outcome of each experiment
+  - Eg. Either they survive, or they die.
+
 - Estimate number of success after n experiments
-  - Two parameters
-  - Number of trials
-- Probability of success
-- Discrete random variables only
-- Expected value of success = mean
 
-Not on exam:
-Mean = n x p (not on exam)
-Variance = np(1 – n) (not on exam)
+> mean = expected value of success
+
+```
+E(x) = numberOfTrials * probability
+```
+
+> Variance
+
+```shell
+numberOfTrials * probability(1-probability)
+```
+
+### Standard Deviation (σ)
+
+> Standard deviation
+
+```shell
+√numberOfTrials * probability(1-probability)
+```
+
+```r
+standard.deviation <-
+sqrt(numberOfTrials * probability(1-probability))
+```
+
+### Sample Standard Deviation (x̅)
+
+> μ <- population mean
+
+> x̅ <- sample mean
+
+```r
+sample.standard.deviation <-
+sqrt(
+  (x[i-n] - x̅)
+  / (n-1))
+```
+
+## Poisson distribution (λ Lambda)
+
+```
+µ = λ * t
+mean <- lambda * unitOfTime
+
+variance σ^2^ <- Var(x) = λ
+
+standard.deviation <- σ = √λ
+```
+
+The Poisson distribution has one parameter:
+Lambda (λ) which can equal
+
+Rate of occurrence:
+
+- `E(x) = λ` the expected or
+- `µ = λ` mean number of events
+-  per unit time/distances
+
+- Also Variance = λ ?
+
+```r
+dpois(x, lambda)
+```
+
+- Discrete random variables
+- Or any factor of that time/ distance variable
 
 
-## TODO: Poisson distribution
-Rate of occurrence per unit time/ distances
-1 parameter λ
-Discrete random variables
-Or any factor of that time/ distance variable
-Mean = λ
-Variance = λ
+### Example Poisson
 
-## TODO: Normal distribution
+```
+mean <-
+µ = E(x) = λ
+mean.for.the.week <-
+µ = λ * t = 16 * 7 = 112
+```
 
-Symmetric
-  Centre is always the mean
-Bell shape
+Expected daily number of patients for a doctor during winter might be λ = 16 per day
+
+
+> Pr(X <= x)
+
+```r
+> ppois(100, 16*7)
+[1] 0.1378483
+```
+
+What is the probability that the doctor will see less than or equal to 100 patients in a week?
+
+The questions asks
+
+`Pr(X ≤ 100)`
+
+We need to adjust the mean value to
+
+`μ = 16*7 = 112`
+
+### Plotting Poisson
+
+TODO:
+
+```r
+plotDist("pois",
+  lambda = 16,
+  xlab = "No. Patients",
+  main = "Poisson Distribution, Mean = 16",
+  ylab = "probability",
+  groups= x==16)
+```
+
+
+
+
+## Normal distribution
+
+- Used for continuous (interval) variables
+
+- Goal: Calculating area under the curve
+
+Is:
+
+- Symmetric
+- The centre is always the mean (μ)
+- Is Bell shape
+- Tail is almost touching X
+
+TODO:
+1. X ~ N (mu, sigma squared)
+
+If given mu and sigma, we can calculate X When something is given to you
+
+
+```
 99.7% of values within µ ± 3σ
 95% of values within µ ± 2σ
 68% of values within µ ± σ
-Z – standardised normal
-  Same bell shape
-  Mean = 0
-  Variance = 1
+```
 
-TODO: formula here
+Z – standardised normal distribution
+- Same bell shape
+- Mean = 0
+- Variance = 1
 
-Not fussed about >= or >
-  Calculating area under the curve
-  Continuous variables
+TODO:
+
+- formula here
+- We don't care about >= or >
+- Which should I report?
+- ? Regardless of p or d
 
 # 5. TODO: Mean of sample distribution and properties
-# 6. TODO: Point estimates
-# 7. TODO: Hypothesis testing
-# 9. TODO: Regression, y = ɑ + ɓx
 
+## TODO: Mean of sample distribution and properties
 
+## TODO: Observation in samples change
 
-# TODO FROM HERE ONWARDS -----------------------
+## TODO: Mean random variable on its own
 
------------ TODO FROM HERE ONWARDS -----------------------
-Exam
-Sample exam
-Under assignments
-Open book
-2 double sided hand written/ typed A4 notes
-Use Mali’s notes as a basis
-Calculator
-Not allowed a graphics calculator
-But do need a simple calculator
-15 minutes reading time
-50 multiple choice questions
-10 short answers (worth 50 marks)
-Mali will send through notes of what she went through in the lecture today
+## TODO: Population (should double check these equation)
 
-### Module 1 - Definition of variables
-
-Definition of variables
-Nominal (categorical)
-Ordinal (rank)
-Interval (equal interval)
-Ratio (absolute zero)
-
-Design of analysis
-
-### Module 2 - Summarising data
-Summarising data
-Graphical
-Numerical
-Measures of central tendency
-Measures of central tendency
-Location of data
-Quantitative data
-Mean (ẍ - should be x bar but couldn’t find the simple)
-Sensitive to each individual data value
-Outliers
-Median
-Divides data into two groups of equal sizes
-Not impacted that much by outliers
-Two formulas – don’t need to know
-Mode
-Maximum frequency value
-Repeated value
-Can be bimodal etc.
-Frequency table/ histogram
-Measures of variability
-Spread of your data
-Range
-Most common measure of variability
-Max value – min value
-Very sensitive to outliers
-Variance
-
-Compared each sample to the mean
-Sensitive to each individual data point
-Remove outliers first?
-IQR
-Range of the middle 50% of data
-Q3 – Q1
-Outlier
-Any values less than Q1 – 1.5IQR or more than Q3 – 1.5IQR
-Boxplot
-No statistical package shows your fences (defined above)
-Use to decide if data is symmetric or not
-Whiskers are the same size
-Q2 (or median) middle of IQR
-Compare to histogram
-Use to compare (variability) of data
-Can look at median value
-Or length of positive skew
-Or largest Q3, etc
-Positive skew – mean greater than median
-Negative skew – mean less than median
-
-### Module 3 Probability using contingency table
-Probability using contingency table
-Events occurrence
-Mutually exclusive event
-Union
-Intersection
-Conditional probability
-
-
-### Module 4 Binomial distribution
-
-Binomial distribution
-When outcome of each experiment is only two options
-Estimate number of success after n experiments
-Two parameters
-Number of trials
-Probability of success
-Discrete random variables only
-Expected value of success = mean
-Mean = n x p (not on exam)
-Variance = np(1 – n) (not on exam)
-
-
-Poisson distribution
-Rate of occurrence per unit time/ distances
-1 parameter λ
-Discrete random variables
-Or any factor of that time/ distance variable
-Mean = λ
-Variance = λ
-Normal distribution
-Symmetric
-Centre is always the mean
-Bell shape
-99.7% of values within µ ± 3σ
-95% of values within µ ± 2σ
-68% of values within µ ± σ
-Z – standardised normal
-Same bell shape
-Mean = 0
-Variance = 1
-
-Not fussed about >= or >
-Calculating area under the curve
-Continuous variables
-
-### Module 5 - Mean of sample distribution and properties
-Mean of sample distribution and properties
-Observation in samples change
-Mean random variable on its own
-Population (should double check these equation)
+```
 Mean µ
 Variance σ2
-E(ẍ) = n/x = µ
-Var(ẍ) = σ2/x = σ2/n
+E(x̅) = n/x = µ
+Var(x̅) = σ2/x = σ2/n
 SE = σ/√x =  σ/√n
-Standard error of mean
-Reduces as n increases
-Inversely proportional
-Central limit theorem
-Distribution of sample mean
-If n > 3σ and keep drawing samples to calculate mean
-They will be different
-Will follow a normal distribution
-qqplot
-For a normal population
-Doesn’t matter about sample size
-ẍ ~ N(µ, σ2/n)
+```
+  - Standard error of mean
+  - Reduces as n increases
+  - Inversely proportional
 
-### Module 6 - Point estimates
-Point estimates
-ẍ point estimate of µ (population mean) - Ṕ
+## CLT - Central Limit Theorem
+
+If a variables:
+- population distribution is normally distributed
+- sample distribution of the mean will be normally distributed
+
+TODO: add math formula
+
+Assume:
+`µ <- 193 seconds` = mean and standard.deviation of youtube video duration is
+`n <- 100` sample size
+
+What's the probability of randomly selecting a
+`sample mean duration < 150 seconds` ?
+
+`n > 30`, therefore:
+
+```
+x̅ ~ N(µ, σ/√n)
+x̅ ~ N(193, σ/√n)
+x̅ ~ N(193, 193/sqrt(100))
+= N(193, 19.3)
+```
+
+> then to get Pr(x̅ < 150)
+```r
+pnorm(150, 193, 19.3)
+[1] 0.01294
+```
+
+What's the probability of randomly selecting a
+`sample mean duration > 240 seconds` ?
+
+```r
+pnorm(240, 193, 19.3, lower.tail = F)
+[1] 0.007441098
+```
+
+- Distribution of sample mean
+- If n > 3σ and keep drawing samples to calculate mean
+- They will be different
+- Will follow a normal distribution
+
+TODO:
+```r
+qqplot()
+```
+- For a normal population
+- Doesn’t matter about sample size
+
+```
+x̅ ~ N(µ, σ2/n)
+```
+
+TODO:
+- add my notes
+- Calculate the mean
+- see if value is far from mean
+- Far from mean, less likely it will happen
+- Population with mean
+- Not talking about distribution of population
+- Population with mean sigma variance sigma squaredu
+
+# 6. TODO: Point estimates
+
+`x̅ point estimate of µ (population mean) - Ṕ`
+
+```
 Error = σ/√n
-Confidence intervals
-Define by ɑ significance level
-(1 - ɑ)/ CI
- 
-Whether using z or n
-These are the true values
-If repeat sampling 100 times, get 100 CI
-Actual population mean (µ) would have CI 95 of these intervals
-Chance of not including value of µ in only 5%
-Using shiny app
-If increase sample size, CI will shrink
-Mean becomes closer to actual mean of population
-Increase level of CI (95 – 99.7), length of CI increases
-Larger interval
-For smaller samples
-Proportion – didn’t do much
-Use z statistic to calculate
-Formula?
+```
 
-### Module 7 - Hypothesis testing
+> confidence.interval
+> Define by ɑ significance level
+
+```
+(1 - ɑ)/ CI
+(1 - significance.level)/confidence.interval
+```
+
+- larger sample = smaller Confidence Intervals
+- Mean becomes closer to actual mean of population
+
+
+TODO:
+
+- Increase level of CI (95 – 99.7), length of CI increases
+- Proportion – didn’t do much
+- Use z statistic to calculate
+- Formula?
+- Whether using z or n
+- These are the true values
+- If repeat sampling 100 times, get 100 CI
+- Actual population mean (µ) would have CI 95 of these intervals
+- Chance of not including value of µ is only 5%
+
+
+# 7. TODO: Hypothesis testing
+
 Hypothesis testing
 Null hypothesis
 Always value you have
 Equal to something
-Alternat hypothesis
+Alternate hypothesis
 Less than, greater than or not equal
 Test whether it is significant or not
 Significant at level ɑ if reject null
@@ -408,6 +526,8 @@ Minimum value for each category must be more than 5
 
 E = expected value if assumption correct (30% black)
 
+# 9. TODO: Regression, y = ɑ + ɓx
+
 ### Module 9 - Regression, y = ɑ + ɓx
 Regression, y = ɑ + ɓx
 Test for a significant relationship between y and x
@@ -430,87 +550,30 @@ Mean = 0
 Variance = σ2
 
 
+# TODO FROM HERE ONWARDS -----------------------
+
+Exam
+Sample exam
+Under assignments
+Open book
+2 double sided hand written/ typed A4 notes
+Use Mali’s notes as a basis
+Calculator
+Not allowed a graphics calculator
+But do need a simple calculator
+15 minutes reading time
+50 multiple choice questions
+10 short answers (worth 50 marks)
+Mali will send through notes of what she went through in the lecture today
+
+
+
+
 # ROUGH STATS NOTES FINAL EXAM ROUGH
 
-## Module 4
-
-Which should I report?
-
-### Binomial-distribution:
-- = bi = only 2 options.
-- applied to discreet only
 
 
 
-Either they survive, or they die.
-
-Defined by the number of trials
-The probability of success.
-
-### Conditional Probability
-
-
-Calculate the mean
-see if value is far from mean
-Far from mean, less likely it will happen
-
-P (B | A) = PA upside down U B
-
-### Poisson distribution
-lambda x t = per day
-
-
-- refers to discreet random variables
-When we use it:
-- Rate of occurence per unit of time or distance
-  - concentrate on time
-  (eg deaths on the road per year)
-  (number of passengers arriving on Xmas day in )
-- Not use it if it's less than something
-
-Only 1 param:
-- Rate of occurance
-- something about lambda
-- What is the probab
-Lambda * t is 10* 7 = 70
-
-Have to multiply lambda
-
-- Not expected to know formula
-
-### Normal distribution
-- Bell shaped
-- centre is always mean
-- is symmetric
-- Tail is almost touching X
-
-Regardless of p or d
-
-1. X ~ N (mu, sigma squared)
-
-
-
-99.7% of value fall between mu +- 3 sigma
-95% of value fall bewee     mu +- 2 sigma
-68% of value                mu +- 1 sigma
-
-- We don't care if we have equals sign or not
-- It's about area under your curve
-
-If given mu and sigma, we can calculate X When something is given to you TODO:
-
-
-
-## Module 5
-
-For any
-
-Population with mean
-
-
-Not talking about distribution of population
-
-Population with mean sigma variance sigma squaredu
 
 
 

@@ -22,7 +22,7 @@ includes:
 search: true
 ---
 
-#### Cheatsheet - Data Science - too long; didn't do
+### Cheatsheet - Data Science - too long; didn't do
 
 tl;dd: common data science concepts and code
 
