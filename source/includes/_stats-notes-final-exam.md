@@ -1,6 +1,81 @@
 # STATS NOTES FINAL EXAM - modules
 
+# 0. The basics
+
+## Jargon and Greek / Latin terms (TODO)
+
+| who | Mean | Standard deviation |
+| --- | --- | --- |
+| Population | µ (mu) | σ |
+| Sample | x̄ | S |
+
+## Greek / Latin Terms
+- ɑ = significance level
+- µ = mean
+- P = proportion
+- σ = Pop standard deviation
+
+## Average
+
+| character | mean |
+| --- | --- |
+| µ (mu) | Population mean |
+| x̄ | Sample mean |
+
+## Overall structure (to add to these notes)
+
+- definitions and concepts?
+- Data format?
+- Data appearance - how data should look so you can test it?
+- Types of tests - understand the types of ways you can test it?
+- Decisions - how do you make decisions?
+- Predictions - then how do make predictions?
+
+## P-value
+
+`p-value` is:
+
+- the probability of observing a test statistic
+  - that is as **extreme** or more extreme than currently observed
+  - **assuming that the null hypothesis is true**
+  
+Can be expressed as `Pr(data|H0)`
+
+- Pr"the probability of" and
+- "|" is read as "given" or "conditional upon."
+- NOT the probability of H0 being true.
+
+## P-value and type I error
+
+Rejecting the null hypothesis when it is in fact true is called a Type I error.
+
+## Significance level α
+1. Significance level is an arbitrary `threshold` or point we set to reject our null hypothesis (providing `p < α`)
+2. So, significance level is also the maximum p-value for which we will reject the null hypothesis. (because `p < α`)
+
+<aside class="notice">
+Significance level is sometimes defined as <strong>the probability we have a type I error</strong> (that we rejected the null hypothesis when it was true). <p />
+
+<strong>But!</strong> That’s only when there’s a t-test and all of the assumptions hold, and the research was perfect. Only in that case, the probability of a type I error will be exactly equal to α.<p />
+
+The reason? p-value is calculated based on the assumption Ho is correct <code>Pr(data|Ho)</code>. So, the p-value can’t be used to prove that Ha is true.<p />
+
+Therefore, we don’t know that “there’s only a 5% chance that a Type I error has occurred”<p />
+
+The long version <a href="http://www.stomponstep1.com/p-value-null-hypothesis-type-1-error-statistical-significance/">statistical significance</a> and here <a href="https://stats.stackexchange.com/questions/158351/p-value-vs-type-1-error">stats overflow</a>
+</aside>
+
 # 1. Types of variables
+
+MUST CHECK:
+
+- Variables
+  - examples of variables
+- Types of data investigation
+
+TODO:
+
+- Design of analysis
 
 **Qualitative** - category, values or percentage %
 
@@ -32,32 +107,46 @@ Eg. Temperature
 
 Eg. Height
 
+# 2. Summarising data
+
 TODO:
 
-- Design of analysis
-
-# 2 Summarising data
-
-- Graphical
+mean = x̅ = Σ x<sub>i</sub> / n
+  Is sensitive to each data value
+  
+  - Graphical
 - Numerical
   - Measures of central tendency
 
 ## Measures of central tendency
 
+| Sensitive to Outliers | NOT sensitive |
+| --- | --- |
+| Mean (x̅) | Median |
+| Range | Mode? |
+
 - ? Location of data
-- Quantitative data
-- Mean (x̅)
-  - Sensitive to each individual data value
+
+### Quantitative data
+
+**Mean (x̅)**
+
+  - *Sensitive* to each individual data value
   - Outliers
-- Median
+
+**Median**
+
   - Divides data into two groups of equal sizes
-  - Not impacted that much by outliers
+  - *Not sensitive* - Not impacted that much by outliers
   - Two formulas – don’t need to know
-- Mode
-  - Maximum frequency value
-  - Repeated value
-  - Can be bimodal etc.
-  - Frequency table/ histogram
+
+**Mode**
+
+  - Divides data into 2 groups of equal size
+  - is: Maximum frequency value or repeated value
+  - ? Frequency table/ histogram
+  - Can be `bimodal` etc.
+    - **Eg.** if 12 and 25 are both repeated in the dataset 10 times and 10 is the maximum frequency for both, then 12 and 25 are mode  
 
 ## Measures of variability
 
@@ -65,11 +154,26 @@ TODO:
 
 ### Range
 - Most common measure of variability
-- Max value – min value
+- `range = max value – min value`
+- Not sensitive to individual data in the range
 - Very sensitive to outliers
 
 ### Variance
-> Variance: Sensitive to each individual data point
+> Variance: is Sensitive to each individual data point
+
+```r
+sqrt(  
+  (xᵢ - x̅)²)
+  / n-1
+  )     
+
+# OR
+
+squareRootOf(  
+  (eachValueInDataset - meanOfXᵢ)^2)
+  / numberOfValues-1
+  )     
+```
 
 - TODO: formula
 - Compared each sample to the mean
@@ -88,10 +192,14 @@ IQR <- Q3 – Q1
 ### Outlier
 
 ```
-outliers < Q1 – 1.5IQR
+# it's an outlier if:
+
+outliers < Q1 – 1.5 x IQR
 # or
-outliers > Q3 – 1.5IQR
+outliers > Q3 – 1.5 x IQR
 ```
+
+
 
 ### Boxplot - Is data symmetric?
 - No statistical package shows your fences (defined above)
@@ -121,7 +229,6 @@ mean < median
 # 3. TODO: Probability using contingency table
 
 [] Copy stats symbols across
-
 
 
 
@@ -248,7 +355,6 @@ dpois(x, lambda)
 - Discrete random variables
 - Or any factor of that time/ distance variable
 
-
 ### Example Poisson
 
 ```
@@ -259,7 +365,6 @@ mean.for.the.week <-
 ```
 
 Expected daily number of patients for a doctor during winter might be λ = 16 per day
-
 
 > Pr(X <= x)
 
@@ -293,7 +398,6 @@ plotDist("pois",
 
 
 
-
 ## Normal distribution
 
 - Used for continuous (interval) variables
@@ -308,10 +412,9 @@ Is:
 - Tail is almost touching X
 
 TODO:
-1. X ~ N (mu, sigma squared)
+1. X ~ N (mu, Σ (sigma) squared)
 
-If given mu and sigma, we can calculate X When something is given to you
-
+If given mu and Σ (sigma), we can calculate X When something is given to you
 
 ```
 99.7% of values within µ ± 3σ
@@ -413,7 +516,17 @@ TODO:
 - Far from mean, less likely it will happen
 - Population with mean
 - Not talking about distribution of population
-- Population with mean sigma variance sigma squaredu
+- Population with mean Σ (sigma) variance Σ (sigma) squaredu
+
+## Mine: Central limit theorum
+
+If sample size large
+and some other stuff
+If sample is drawn from normal po
+Then
+Define Xbar
+mean is
+variance is Σ (sigma)^2 / n
 
 # 6. TODO: Point estimates
 
@@ -434,7 +547,6 @@ Error = σ/√n
 - larger sample = smaller Confidence Intervals
 - Mean becomes closer to actual mean of population
 
-
 TODO:
 
 - Increase level of CI (95 – 99.7), length of CI increases
@@ -447,6 +559,48 @@ TODO:
 - Actual population mean (µ) would have CI 95 of these intervals
 - Chance of not including value of µ is only 5%
 
+## 6.
+
+If Xbar is = point definition of
+
+If asked for error
+
+error is Σ (sigma) / square root of n
+
+
+P^ hat
+
+
+## Confidence level
+
+Significance level alpha
+
+TODO copy formula here
+
+This is when we might use T
+
+If use T, we replace Σ (sigma) with S
+
+Every time I change the formula
+My confidence interval keeps changing
+
+If I increase size of sample
+Σ (sigma) divided by square root of n
+Confidence interval shrinks
+
+mean becomes closer to actual mu
+becomes more accurate
+
+If I increase the level of my confidence
+
+If I want a higher level of confidence
+then alpha is 1%.
+
+Then
+
+## Confidence interval for proportion
+
+When sample size large, always normal distribution so use z
 
 # 7. TODO: Hypothesis testing
 
@@ -520,140 +674,6 @@ Pblue = 20%
 Alternat assumptions
 For all categories together
 Not for each category separately
-Χ2 – chi square test
-Degrees of freedom: number of categories – one
-Minimum value for each category must be more than 5
-
-E = expected value if assumption correct (30% black)
-
-# 9. TODO: Regression, y = ɑ + ɓx
-
-### Module 9 - Regression, y = ɑ + ɓx
-Regression, y = ɑ + ɓx
-Test for a significant relationship between y and x
-Null: no relationship
-Alternate: is a relationship
-Look at p value for F statistic
-Small p, reject null
-Describe strength of relationship
-Look at R value
-R may be negative or positive
-R > 0.75 – yes there is a strong relationship
-ɓ = slope
-Can be positive or negative
-Change in y per unit x
-ɑ = significance in model
-ɑ = 0 vs ɑ ≠ 0
-Will be given p value in R
-Your residual must be normal
-Mean = 0
-Variance = σ2
-
-
-# TODO FROM HERE ONWARDS -----------------------
-
-Exam
-Sample exam
-Under assignments
-Open book
-2 double sided hand written/ typed A4 notes
-Use Mali’s notes as a basis
-Calculator
-Not allowed a graphics calculator
-But do need a simple calculator
-15 minutes reading time
-50 multiple choice questions
-10 short answers (worth 50 marks)
-Mali will send through notes of what she went through in the lecture today
-
-
-
-
-# ROUGH STATS NOTES FINAL EXAM ROUGH
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Central limit theorum
-
-
-If sample size large
-and some other stuff
-If sample is drawn from normal po
-
-Then
-
-
-
-Define Xbar
-mean is
-
-variance is sigma^2 / n
-
-
-
-
-
-## 6.
-
-
-If Xbar is = point definition of
-
-
-If asked for error
-
-error is sigma / square root of n
-
-
-
-P^ hat
-
-
-
-## Confidence level
-
-Significance level alpha
-
-TODO copy formula here
-
-This is when we might use T
-
-If use T, we replace sigma with S
-
-
-Every time I change the formula
-My confidence interval keeps changing
-
-
-If I increase size of sample
-sigma divided by square root of n
-Confidence interval shrinks
-
-mean becomes closer to actual mu
-becomes more accurate
-
-If I increase the level of my confidence
-
-If I want a higher level of confidence
-then alpha is 1%.
-
-Then
-
-## Confidence interval for proportion
-
-When sample size large, always normal distribution so use z
-
-
 
 ## 7. Hypothesis testing
 
@@ -679,11 +699,9 @@ We reject H0 if 100 falls in Confidence something is
 
 Rejection region (not examinable)
 
-
 Didn't examine this
 Type I errors - sample is wrong, and
 Type II errors
-
 
 TODO: add pregnant and boy who cried wolf here
 
@@ -693,15 +711,13 @@ TODO: add pregnant and boy who cried wolf here
 2. both populations are normal
 3. Samples taken for two populations
 
-We ahve to assume sigma^2 = sigma^2 of population
+We have to assume Σ (sigma)^2 = Σ (sigma)^2 of population
 
-We use Levene test
-
+We muse Levene test
 
 If p value is less than alpha
 
 or 95%
-
 
 We're testing the difference between mu1 and mu2
 m1 - m2
@@ -709,15 +725,119 @@ m1 - m2
 This is where we're looking for if the value of something falls around zero
 (one is plus, the other is negative)
 
-
-
-
 ## Paired Data
 -
 
+# 8 Chi Squared test
 
-## Module 8
+## Goodness of fit
 
+> How to do Chi Squared
+
+> 1. Prep data:
+
+```r
+# Getting % or proportion that you want to test
+pop_prop<-c(0.24,0.13,0.16,0.20,0.13,0.14)
+# What you want to compare it to:
+tally(
+  ~Colour,
+  data =mms,
+#   format="proportion")
+#   Blue     Brown     Green    Orange       Red    Yellow
+# 0.1835878 0.1416031 0.1843511 0.2076336 # 0.1419847 0.1408397
+  
+```
+
+```r
+ 2. Get X-squared 50.835
+
+# xchisq.test(tally(~Colour, data = mms),p = pop_prop)
+
+# Chi-squared test for given probabilities
+# data:  x
+> X-squared = 50.835, df = 5, p-value = 9.348e-10
+#   481      371      483      544      372      369   
+# (628.80) (340.60) (419.20) (524.00) (340.60) (366.80)
+# [34.741] [ 2.713] [ 9.710] [ 0.763] [ 2.895] [ 0.013]
+# <-5.89>  < 1.65>  < 3.12>  < 0.87>  < 1.70>  < 0.11>
+
+```
+
+```r
+qchisq(0.05, df = 5, lower.tail = FALSE)
+# [1] 11.0705
+```
+> If output > X-squared , we can reject Ho
+
+```r
+11.0705 > 50.835 => reject Ho
+```
+```r
+# P-value of Chi squared
+pchisq(50.83, df = 5,lower.tail = FALSE)
+# [1] 9.370786e-10
+```
+> If p < 0.05, then we can reject Ho
+
+Blue | Brown | Green | Orange | Red | Yellow |
+-------------- | -------------- | -------------- | -------------- | -------------- | -------------- | --------------
+What we have | 0.1835878 | 0.1416031 | 0.1843511 | 0.2076336 | 0.1419847 | 0.1408397
+Compare it to this | 0.24 | 0.13 | 0.16 | 0.20 | 0.13 | 0.14
+
+## TODO: Chi-square Test of Association
+
+```r
+Breast.Cancer$Group <-
+  factor(
+    Breast.Cancer$Group,
+    levels=c(1,2),
+    labels = c("Case","Control"))
+    
+Breast.Cancer$Age_Cat <-
+    factor
+      (Breast.Cancer$Age_Cat,
+        levels = c(1,2,3,4,5),
+        labels = c("< 20","20 - 24","25 - 29","30 - 34", ">= 35"),
+        ordered=TRUE)
+        
+tally( ~ Age_Cat | Group, margins=TRUE,data=Breast.Cancer)
+         Group
+# Age_Cat    Case Control
+#   < 20      320    1422
+#   20 - 24  1206    4432
+#   25 - 29  1011    2893
+#   30 - 34   463    1092
+#   >= 35     220     406
+#   Total    3220   10245
+
+tally( ~ Age_Cat | Group, margins=TRUE, format = "proportion", data=Breast.Cancer)
+         Group
+# Age_Cat         Case    Control
+#   < 20    0.09937888 0.13879941
+#   20 - 24 0.37453416 0.43260127
+#   25 - 29 0.31397516 0.28238165
+#   30 - 34 0.14378882 0.10658858
+#   >= 35   0.06832298 0.03962909
+#   Total   1.00000000 1.00000000
+
+table <- tally( ~ Age_Cat | Group, format = "proportion", data=Breast.Cancer)
+
+barplot(table,ylab="Proportion Within Group",
+          ylim=c(0,.6),legend=rownames(table),beside=TRUE,
+          args.legend=c(x = "top",horiz=TRUE,title="Age Category"),
+          xlab="Age Category", col=rainbow(5, start = .4, end = .7))
+grid()
+```
+
+### TODO from Verity:
+Χ2 – chi square test
+Degrees of freedom: number of categories – one
+Minimum value for each category must be more than 5
+
+E = expected value if assumption correct (30% black)
+
+## Mine: Module 8
 
 Goodness of time
 
@@ -733,8 +853,7 @@ df (degrees of freedom)
 
 Called goodness of fit
 
-
-## Test of association
+## Mine Test of association
 
 More than one categorical variable
 - Want to know if there is relationship
@@ -754,8 +873,29 @@ Expected value = n(
   
   Then we get something about goodness of fit
   
-  
-## mod 9. Regression equation
+
+# 9. TODO: Regression, y = ɑ + ɓx
+
+Test for a significant relationship between y and x
+Null: no relationship
+Alternate: is a relationship
+Look at p value for F statistic
+Small p, reject null
+Describe strength of relationship
+Look at R value
+R may be negative or positive
+R > 0.75 – yes there is a strong relationship
+ɓ = slope
+Can be positive or negative
+Change in y per unit x
+ɑ = significance in model
+ɑ = 0 vs ɑ ≠ 0
+Will be given p value in R
+Your residual must be normal
+Mean = 0
+Variance = σ2
+
+## mine: mod 9. Regression equation
 
 y = alpha (intercept) + B(slope)X
 
@@ -764,6 +904,21 @@ Testing if there's a significant relationship between Y and X
 H0: there is no significant relation
 HA: there is a signifcant relationship
 
-
 Something about looking for P value
 Look for positive or negative sign
+
+# TODO FROM HERE ONWARDS -----------------------
+
+Exam
+Sample exam
+Under assignments
+Open book
+2 double sided hand written/ typed A4 notes
+Use Mali’s notes as a basis
+Calculator
+Not allowed a graphics calculator
+But do need a simple calculator
+15 minutes reading time
+50 multiple choice questions
+10 short answers (worth 50 marks)
+Mali will send through notes of what she went through in the lecture today
