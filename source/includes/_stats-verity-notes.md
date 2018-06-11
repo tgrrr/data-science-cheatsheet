@@ -537,8 +537,11 @@ Need for quizzes/ assignments though
 ## Lecture 5 – Probability Distributions: Random but Predictable
   Normal distribution
   Example
+
+  ```r
   IQ
   IQ ~ N(μ,θ) ~ N(100,5)
+  ```
   Properties
 
   The centre of the symmetric bell shape is the mean (μ)
@@ -548,6 +551,7 @@ Need for quizzes/ assignments though
   For continuous <= vs < doesn’t matter as much
   Looking for area under the curve
   Calculating probability
+  ```r
   Probability of IQ less than 80 = 0.09121122
   pnorm(q, mean, sd, lower.tail = TRUE)
   pnorm(80, 100, 15, lower.tail = TRUE)
@@ -556,32 +560,39 @@ Need for quizzes/ assignments though
   Pr(85 < x < 115) = 0.6826895
   Within 1 θ of the mean on either side
   pnorm(115, 100, 15) - pnorm(85, 100, 15)
+  ```
   Find x given percentile
   Which value of x, get 90% probability? = 119.2233
+  ```r
   Pr (X <x) = 0.9
   qnorm(p, mean, sd, lower.tail)
   qnorm(0.9, 110, 15, lower.tail = TRUE)
   95% of population between a score of 71 and what upper value
   95% between mean and 2θ
   71% is not μ +- 2θ
+  ```
   Almost but not exactly
+  ```r
   Pr(71 < x < b) = 0.95
   Can find Pr(X > 71) = 0.973 (above 71)
   1 - pnorm(q=71, mean = 100, sd = 15) = 0.9734024
   pnorm(q = 71, mean = 100, sd =15, lower.tail = FALSE)
   qnorm(1 - 0.023, 100, 15) = 129.9309
   Can check using  pnorm(71 < x < 130) = 0.95
+  ```
   What if you don’t have access to R (or another statistical program)?
   Standard Normal Z-distribution
   Mean is always 0
   Standard deviation is always 1
   Use the letter Z
   We can transfer a normal distribution into SN or ZD
+  ```
   Z = (x - μ) / Ө
   Example
   Pr(x > 110) using SN
   Z = (x - μ) / Ө = (110 - 100)/ 15 = 10/15 = 0.667
   Pr(x > 110) = Pr(z > 0.667)
+  ```
   Then can use a normal SD table and look up the value
 
   Get more precise values from R/ stats package
@@ -636,6 +647,7 @@ Need for quizzes/ assignments though
 
   Example
   Youtube video length
+  ```r
   n = 10 (graph skewed to right)
   μ = 193
   θ² = 193^2
@@ -644,16 +656,17 @@ Need for quizzes/ assignments though
   n = 30
 
   n = 100
-
+  ```
   Central limit theorem
   If the underlying population distribution of a variable is normally distributed, the resulting distribution of the mean will be normally distributed
 
   Probability of randomly selecting a sample of size n = 100 that has a sample mean duration of less than 150 sec
+  ```r
   Pr( X̅ < 150) = 0.0294095
   pnorm(150, 193, 19.3)
   n = 200
   pnorm(300, 193, 193/√200, lower.tail = FALSE) = 2.244519e-15
-
+  ```
 
 
 
@@ -679,17 +692,17 @@ Need for quizzes/ assignments though
   Usually give value of confidence
   Range from 90 to 99%
 
-  1 - α is significance level
-  100 (1− α)% CI, is an interval estimate for a population parameter, based on a given sample statistic, where if samples of a certain size n were repeatedly drawn from the population and a CI for each sample's statistic was calculated, 100(1−α)% of these intervals would capture the population parameter, whereas the other 100(α)% would not.
+  `1 - α` is significance level
+  `100 (1− α)% CI`, is an interval estimate for a population parameter, based on a given sample statistic, where if samples of a certain size n were repeatedly drawn from the population and a CI for each sample's statistic was calculated, 100(1−α)% of these intervals would capture the population parameter, whereas the other 100(α)% would not.
   Confidence interval inverse relationship to sample size
   Same size getting closer to whole population size
-  100 * (1 - α)% CI = confidence interval
+  `100 * (1 - α)% CI = confidence interval`
   Value of α is the significance level
   Simple explanation
   Confidence intervals are one way to represent how "good" an estimate is; the larger a [95]% confidence interval for a particular estimate, the more caution is required when using the estimate. Confidence intervals are an important reminder of the limitations of the estimates.
   Visualising confidence interval
   App of CI
-  100, 10, 0.05
+  `100, 10, 0.05`
   Mean of actual population - black
   Mean + CI for each sample - blue
   Mean outside CI - red
@@ -717,8 +730,11 @@ Need for quizzes/ assignments though
   Find mean of sample
   favstats(~IQ, data = IQ)
   Upper and lower confidence intervals
+
+  ```r
   mean(IQ$IQ) + qnorm(0.975) * (15/sqrt(1290) = 103.91
   mean(IQ$IQ) - qnorm(0.975) * (15/sqrt(1290) = 102.07
+  ```
   If you don’t know σ
   σ is the standard deviation of the population
   Use population sample σ as a guide
@@ -731,21 +747,27 @@ Need for quizzes/ assignments though
   Shape similar to normal distribution
   Same mean but a bit flatter
 
-  If n = 25+, t and normal distribution have ‘same’ distribution
+  If `n = 25+`, t and normal distribution have ‘same’ distribution
   Used heavily when sample size is less than 25
   Have to use assumption of normality and sigma is known
+  ```r
   qt(0.975, df = 1289) = 1.96
+  ```
   Copy formulas into notes
   As degrees of freedom increases t ➝ z
   Confidence interval (CI)
   Built in command in R
+  ```r
   confint(t.test(~IQ, data - IQ))
+  ```
   Gives mean
   Lower CI
   Upper CI
   Level - default is 0.95 (confidence.level = 0.95)
   Can combine confint() and t.test() functions
+  ```r
   confint(t.test(~Diameter, data = subset(Pizza, subset = (Store == ‘Dominos’))))
+  ```
   Exam
   Open book
   No sample exam paper published
@@ -761,10 +783,12 @@ Need for quizzes/ assignments though
   Using water data
   95% CI people choose Fiji as first choice
   Binomial distribution
-  If np(1 - p) >= 5, then the 95% CI for a portion can be calculated using normal distributions
+  If `np(1 - p) >= 5`, then the 95% CI for a portion can be calculated using normal distributions
   Copy in equation from notes
-  Here np(1 - p) = 109 * 0.404 (1 - 0.404) = 26
+  Here `np(1 - p) = 109 * 0.404 (1 - 0.404) = 26`
   Safe to use normal distribution (26 >= 5)
+
+  ```r
   install packages(“epitools”)
   library(epitools)
   binom.approx(44, 109, conf.level=0.95)
@@ -777,12 +801,13 @@ Need for quizzes/ assignments though
   Conf level = 0.95
   If don’t use normal
   binom.exact(44, 109, conf.level=0.95)
+  ```
   Similar answers
   Rates
   Follow poisson distribution
   Pay attention to time period
-  If ƛ > 100, safe to use normal approximation
-  pois.approx(156, pt=1, conf.level=0.95)
+  If `ƛ > 100`, safe to use normal approximation
+  `pois.approx(156, pt=1, conf.level=0.95)`
   Returns
   x
   pt (time period)
@@ -849,32 +874,40 @@ Need for quizzes/ assignments though
   Oral human body temperature
   favstats(Body_temp, data = Body_temp)
   check n
+  ```r
   Ho: µ = 37
   Ha: µ < 37
   P-value = p = Pr(Ẍ < 36.81 | µ = 37)
+  ```
   How possible it is to get mean less than 36.81 if actual population mean is 37
+  ```r
   If p < ɑ, reject Ho
   If p >= ɑ, fail to reject Ho
   Usually ɑ = 0.05 for stuff I have done previously
+  ```
   Pay attention to the sign of probability in p-value
   Follows the sign in Ha
   Calculate one-sided p-value
   Convert the mean into t-test statistic and calculate p-value
-  p = Pr(t < -5.38 | t = 0)
+  `p = Pr(t < -5.38 | t = 0)`
   Where t defined by
 
-  pt(t, df = n – 1)
+  `pt(t, df = n – 1)`
   Since p is very small, can reject the null
   Claim test is very significant and mean temperature is less than 37
   Calculate two-sided p-value
-  Ha: µ <> 37
+  `Ha: µ <> 37`
   Things get a little strange if we use a two-tailed test (Ha: µ <> 37)
   Because we need to take into account the mean also falling 5.83 SE above the mean
+  ```r
   p = Pr(t < 5.83 | t = 0) + Pr(t > 5.83 | t = 0)
+  ```
   As the t-distribution is symmetric, the two probabilities to be added are exactly the same
   Therefore, a shortcut to a two-tailed p-value can be calculated as
-  `p = Pr(t < 5.83 | t = 0) * 2
-  pt(t, df = n – 1) *2`
+  ```r
+  p = Pr(t < 5.83 | t = 0) * 2
+  pt(t, df = n – 1) *2
+  ```
   When to reject the null?
   Suggest the ‘treatment’ has a significant
   Fail to reject null
@@ -889,9 +922,15 @@ Need for quizzes/ assignments though
   Recall when the population standard deviation is unknown, the 95% CI is calculated as:
    (apologises for the bad resolution)
   confint(t.test(~Body_temp, data = Body_temp))
+
+  ```r
   Is µ = 37 captured by the 95% CI (36.74, 36.87)? No – reject Ho
+  ```
   R
+
+  ```r
   t.test(~Body_temp, data = Body_temp, mu = 37, alternative = “less”)
+  ```
   One-sided t test
   Only one-sided confidence level given
   If so, need to run R code twice to get two-sided confidence intervals
@@ -966,10 +1005,12 @@ Need for quizzes/ assignments though
   If you fail to reject the null, use the standard two-sample t-test in R var.equal = TRUE
   Or use 2-sample t-test in R with variance not equal (Welch two-sample) var.equal = FALSE
   R code
+  ```r
   Battery_sub <- subset(Battery, subset = Voltage == 0.8)
   favstats(~Pulses | Brand, data = Battery_sub)
   leveneTest(Pulses ~ Brand, data = Battery_sub)
   t.test(~Pulses | Brand, data = Battery_sub)
+  ```
   Interpretation
   Negative confidence intervals means mean 2 is greater than mean 1
   If confidence interval includes zero, have to ACCEPT the null
@@ -978,7 +1019,9 @@ Need for quizzes/ assignments though
   Where:
 
   Where t follows a T-distribution with the following degrees of freedom
+  ```r
   df = n1 + n2 – 2
+  ```
   Different when you have unequal variance
   Welch 2 sample t-test
   Hard to calculate
@@ -999,9 +1042,9 @@ Need for quizzes/ assignments though
   We are dealing with population differences only so it is a one sample test
   If the two conditions are the same then the mean of differences is zero
   Test statistics
-  Test statistics following T-distribution with df = n – 1 is:
-
-  The (1 - ɑ)% CI is:
+  Test statistics following T-distribution with `df = n – 1` is:
+  
+  The `(1 - ɑ)% CI` is:
 
   Graphical interpretation of paired samples
   Dependant sample assessment plots using granova and R
@@ -1027,7 +1070,9 @@ Need for quizzes/ assignments though
   Population homogeneity of variance
   Decision rules:
   Reject Ho:
+  ```
   If p-value <  (ɑ significance level)
+  ```
   If 95% confidence interval of the difference between means does not capture Ho: Uenergizer – Uultracell - 0
   Otherwise, fail to reject Ho
   Conclusion:
@@ -1039,7 +1084,7 @@ Need for quizzes/ assignments though
   We defaulted to not assuming equal variance, despite the Levene’s test indicating it was safe to assume
   Estimated difference between means: 118.22 – 156.67 = -38.45 pulses
   95% CI of difference between means [-46.18, -30.71]
-  p-value < 0.01
+  `p-value < 0.01`
   Decision:
   Reject the null
 
@@ -1077,10 +1122,12 @@ Need for quizzes/ assignments though
   In this class
   Linear
   1 independent variable
+  ```r
   y = ɑ + ɓx + ɛ
   y – dependant variables
   ɑ - constant/ intercept
   ɓ - slope
+  ```
   Change in y per unit x
   Can be negative or positive
   X – predictor
@@ -1101,10 +1148,11 @@ Need for quizzes/ assignments though
   Minimise the sum of squared differences
   Get rid of negatives
 
-
   Always points not on the line
   ɛ difference between the predicted and actual data
+  ```r
   ɛ(point 5) = y(5) – y(pred)
+  ```
   Statistical packages use optimisation to get the lowest error possible
   Mean of 0, variance of σ2
   For ɛ
@@ -1148,8 +1196,9 @@ Need for quizzes/ assignments though
   Normality of residual
   Don’t check using graph
   Normal probability qqplot
+  ```r
   qqplot(ouesvo2maxmodel$residuals,  dist = “norm”)
-
+  ```
   Homoscedasticity
   Related to the assumption of homogeneity of variance for two-sample t-test
   mplot(ouesvo2maxmodel)
@@ -1165,8 +1214,10 @@ Need for quizzes/ assignments though
   Reject Ho if p-value for F-stats < ɑ
   R code
   Using lm() function
+  ```r
   ouesvo2maxmodel <- lm(VO2_Max ~ OUES_3, data = OUES)
   msummary(ouesvo2maxmodel)
+  ```
   Give a name to your regression model
   Doesn’t give you output
   Always y variable first, followed by x
@@ -1177,15 +1228,20 @@ Need for quizzes/ assignments though
   First line
   Intercept, ɑ in regression
   Std use for confidence intervals
-  p value for ɑ
+  `p value for ɑ`
   Second line
-  p value for ɓ = 0
+  `p value for ɓ = 0`
   Gives you both f and p values
+
+  ```r
   p = 1.345e-13
+  ```
   Very small p, is a relationship between x and y
 
   Regression equation
+  ```r
   Y = 2017 + 0.6085x
+  ```
   Increase as positive
   Intercept
   p value for
@@ -1251,102 +1307,105 @@ Need for quizzes/ assignments though
   Associated between variable and different levels of your category variables
   Whenever you make a decision, need a test statistic
   Chi – test
-  1 parameter
-  Follows a standard distribution
-  Longer tail
+    1 parameter
+    Follows a standard distribution
+    Longer tail
   What we will cover in this lecture
-  Investigate the distribution of categorical variables or explore the associations between categorical variables using Chi-square distribution
-  Determine when a Chi-square goodness of fit test or Chi-square distribution
-  Apply and interpret the Chi-square goodness of fit test
-  Apply and interpret the Chi-square test of association
-  Use R to compute a Chi-square goodness of fit test and Chi-square test of association
-  Interpret a Chi-square goodness of fit test and Chi-square test of association
+    Investigate the distribution of categorical variables or explore the associations between categorical variables using Chi-square distribution
+    Determine when a Chi-square goodness of fit test or Chi-square distribution
+    Apply and interpret the Chi-square goodness of fit test
+    Apply and interpret the Chi-square test of association
+    Use R to compute a Chi-square goodness of fit test and Chi-square test of association
+    Interpret a Chi-square goodness of fit test and Chi-square test of association
   Example: M&Ms
-  6 colours
-  Manufacturer claims different percentage of colours
-  n = 48 packs of M&Ms, 2620 M&Ms
-  In table
-  Observed – based on sample
-  Proportion of observed
-  Expected – based on manufacturer claim
-  Population proportion – manufacturer claim
+    6 colours
+    Manufacturer claims different percentage of colours
+    n = 48 packs of M&Ms, 2620 M&Ms
+    In table
+      Observed – based on sample
+      Proportion of observed
+      Expected – based on manufacturer claim
+      Population proportion – manufacturer claim
 
   Find absolute error
-  As some differences negative and some are positive
+    As some differences negative and some are positive
   Could use a 2 proportion test
-  In a t-test
-  Didn’t learn this
+    In a t-test
+    Didn’t learn this
   Goodness of fit
-  Can test no matter how many categories
-  Differences close to zero, accept claim
-  Otherwise reject
-  Only one assumption
-  Minimum expected value must be at least 5
-  Hypotheses
-  Ho: distribution as claimed
-  Ha: not as claimed
-  Only one alternative
-  Not one per category
-  Use a two-smaple t-test instead for this
+    Can test no matter how many categories
+    Differences close to zero, accept claim
+    Otherwise reject
+    Only one assumption
+    Minimum expected value must be at least 5
+    Hypotheses
+    Ho: distribution as claimed
+    Ha: not as claimed
+    Only one alternative
+    Not one per category
+    Use a two-smaple t-test instead for this
 
-  Smaller χ2 – close to expected
-  Larger χ2 – further from expected
-  50.8 is large!
-  Degrees of freedom = number of categories minus 1
+    Smaller χ2 – close to expected
+    Larger χ2 – further from expected
+    50.8 is large!
+    Degrees of freedom = number of categories minus 1
   R
-  qchisq(0.05, df = 5, lower.tail = FALSE)
-  Calculate p-value of Pr(χ2 > 50.83)
-  pchisq(50.83, df = 5, lower.tail = FALSE)
-
+    ```r
+    qchisq(0.05, df = 5, lower.tail = FALSE)
+    Calculate p-value of Pr(χ2 > 50.83)
+    pchisq(50.83, df = 5, lower.tail = FALSE)
+    ```
   Test of association
-  Example: breast cancer vs. age they had their first child
-  Contingency table
+    Example: breast cancer vs. age they had their first child
+    Contingency table
 
-  Categorical values
-  Degrees of freedom = (number of categories in columns – 1) * (number of categories in rows – 1)
-  Calculate percentage within group and percentage within age
-  If not associated with age, proportion the same everywhere
-  R
-  Breast.Cancer$Group <- factor(Breast.Cancer$Group, levels = c(1,2), labels = c(“Case”, “Control”)
-  Breast.Cancer$Age_Cat <- factor(Breast.Cancer$Age_Cat, levels = c(1,2,3,4,5), labels = c(“<20”, “20-24”, “25-29”, “30-34”, “>=35”), ordered = TRUE)
-  tally(~Age_Cat | Group, margins = TRUE, data = Breast.Cancer)
-  tally(~Age_Cat | Group, margins = TRUE, format = “proportion”, data = Breast.Cancer)
-  table <- tally(~Age_Cat | Group, format = “proportion”, data = Breast.Cancer)
-  barplot(table, ylab = “Proportion Within Group”,
-  ylim = c(0,6), legend = rownames(table), beside = TRUE,
-  args.legend=c(x = “top”, horiz=TRUE, title = “Age Category”),
-  xlab = “Age Category”, col=rainbow(5, start = .4, end = .7))
-
+    Categorical values
+    Degrees of freedom = (number of categories in columns – 1) * (number of categories in rows – 1)
+    Calculate percentage within group and percentage within age
+    If not associated with age, proportion the same everywhere
+    R
+      ```r
+      Breast.Cancer$Group <- factor(Breast.Cancer$Group, levels = c(1,2), labels = c(“Case”, “Control”)
+      Breast.Cancer$Age_Cat <- factor(Breast.Cancer$Age_Cat, levels = c(1,2,3,4,5), labels = c(“<20”, “20-24”, “25-29”, “30-34”, “>=35”), ordered = TRUE)
+      tally(~Age_Cat | Group, margins = TRUE, data = Breast.Cancer)
+      tally(~Age_Cat | Group, margins = TRUE, format = “proportion”, data = Breast.Cancer)
+      table <- tally(~Age_Cat | Group, format = “proportion”, data = Breast.Cancer)
+      barplot(table, ylab = “Proportion Within Group”,
+      ylim = c(0,6), legend = rownames(table), beside = TRUE,
+      args.legend=c(x = “top”, horiz=TRUE, title = “Age Category”),
+      xlab = “Age Category”, col=rainbow(5, start = .4, end = .7))
+      ```
 
 
   Example write up
-  If there is no association between age at first birth and breast cancer, the height of the bars of the cases and controls within each age band would be the same
-  Mothers with breast cancer are less likely to have their children under the age of 20 when compared to controls
-  This is an example of a categorical association. The probability of being a mother with breast cancer depends on the age of the mother when they had their first child
+    If there is no association between age at first birth and breast cancer, the height of the bars of the cases and controls within each age band would be the same
+    Mothers with breast cancer are less likely to have their children under the age of 20 when compared to controls
+    This is an example of a categorical association. The probability of being a mother with breast cancer depends on the age of the mother when they had their first child
   We need to determine with a Chi-square test of association whether this relationship is statistically significant or whether it reflects natural sampling variability assuming breast cancer and age are independent.
   Hypotheses
-  Ho: there is no association in the population between the categorical variables
-  Ha: there is an association in the population
+    Ho: there is no association in the population between the categorical variables
+    Ha: there is an association in the population
   Equation
 
-  Oij is the observed count in the ith row of the jth column
+    Oij is the observed count in the ith row of the jth column
 
   More R
-  xchisq.test(tally(~Group | Age_Cat, data = Breast.Cancer))
-
-  Results in this order
-  Observed
-  Expected
-  Contribution to χ2
-  Residual
+    ```r
+    xchisq.test(tally(~Group | Age_Cat, data = Breast.Cancer))
+    ```
+    Results in this order
+      Observed
+      Expected
+      Contribution to χ2
+      Residual
   Example write-up
-  A Chi-square test of association was used to test for a statistically significant association between breast cancer status and the age of a mother at first birth
-  The results of the test found a statistically significant association, χ2 = 130.34, p < 0.001
-  The results of this study suggest that women with breast cancer were more likely to give birth to their first child in older age categories when compared to controls
-  Can continue to copy from notes but can’t be bothered…
+    A Chi-square test of association was used to test for a statistically significant association between breast cancer status and the age of a mother at first birth
+    The results of the test found a statistically significant association, χ2 = 130.34, p < 0.001
+    The results of this study suggest that women with breast cancer were more likely to give birth to their first child in older age categories when compared to controls
+    Can continue to copy from notes but can’t be bothered…
   Examples
-  Goodness of fit test – can drunk people walk straight?
-  Test of association – eye colour vs hair colour?
+    Goodness of fit test – can drunk people walk straight?
+    Test of association – eye colour vs hair colour?
 
 ## Lecture 12 – Revision
 

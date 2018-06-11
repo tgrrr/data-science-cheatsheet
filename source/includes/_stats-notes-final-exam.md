@@ -435,6 +435,9 @@ TODO:
 - Which should I report?
 - ? Regardless of p or d
 
+![Edge of the bell curve](../images/dating_pools.png)
+
+
 # 5. TODO: Mean of sample distribution and properties
 
 ## TODO: Mean of sample distribution and properties
@@ -561,6 +564,9 @@ TODO:
 - If repeat sampling 100 times, get 100 CI
 - Actual population mean (µ) would have CI 95 of these intervals
 - Chance of not including value of µ is only 5%
+
+![Correlation Interval](../images/significantxkcd882.png)
+
 
 <!-- _______________________________________
 
@@ -1317,53 +1323,67 @@ Expected value = n(
   Then we get something about goodness of fit
   
 
-# 9. TODO: Regression, y = ɑ + ɓx
+# 9. Regression
+
+Simple linear regression and correlation
+
+  `y = ɑ (intercept) + ɓ(slope)x + ɛ (epsilon)`
+  
+  y is dependent variable
+
+We like scatter plots here
+
+## Test if there's a significant relationship between y and x
+  H<sub>0</sub>: no significant relationship
+  H<sub>a</sub>: is a significant relationship
+  Look at p value for F statistic
+  Small p, reject null
+
+## Describe strength of relationship
+  Look at R value
+  if `R > 0.75` – yes there is a strong relationship
+  R may be negative or positive
+
+## ɓ = slope
+  Can be positive or negative
+  Change in y per unit x
+
+## ɑ = significance in model
+  `ɑ = 0 vs ɑ ≠ 0`
+  Will be given p value in R
+
+## Your residual must be normal
+
+  `Mean = 0`
+  `Variance = σ2`
+
+## Fitting a linear regression in R
+Ordinary least squares (OLS)
+Minimise the sum of squared differences
+Get rid of negatives
+
+`ɛ(point 5) = y(5) – y(pred)`
+
+Small σ2
+
+- Good predictive ability
+- Points closer to predicted line
+- Large σ2 not so good
+
+Checking these things:
 
 
+Hypothesis
 
-Test for a significant relationship between y and x
-Null: no relationship
-Alternate: is a relationship
-Look at p value for F statistic
-Small p, reject null
-Describe strength of relationship
-Look at R value
-R may be negative or positive
-R > 0.75 – yes there is a strong relationship
-ɓ = slope
-Can be positive or negative
-Change in y per unit x
-ɑ = significance in model
-ɑ = 0 vs ɑ ≠ 0
-Will be given p value in R
-Your residual must be normal
-Mean = 0
-Variance = σ2
+Test Assumptions
+1. Regression
+2. Independence
+3. Normality of residue
+4. Normal probability
+5. Homoscedasticity
 
-## mine: mod 9. Regression equation
+Heteroscedasticity
+  Reject Ho if p-value for F-stats < ɑ
 
-y = alpha (intercept) + B(slope)X
 
-Testing if there's a significant relationship between Y and X
-
-H<sub>0</sub>: there is no significant relation
-HA: there is a signifcant relationship
-
-Something about looking for P value
-Look for positive or negative sign
-
-# TODO FROM HERE ONWARDS -----------------------
-
-Exam
-Sample exam
-Under assignments
-Open book
-2 double sided hand written/ typed A4 notes
-Use Mali’s notes as a basis
-Calculator
-Not allowed a graphics calculator
-But do need a simple calculator
-15 minutes reading time
-50 multiple choice questions
-10 short answers (worth 50 marks)
-Mali will send through notes of what she went through in the lecture today
+![Pearce Correlation](../images/pearceGhostsFire.gif)
