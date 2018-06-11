@@ -39,11 +39,11 @@
   - that is as **extreme** or more extreme than currently observed
   - **assuming that the null hypothesis is true**
   
-Can be expressed as `Pr(data|H0)`
+Can be expressed as `Pr(data|H<sub>0</sub>)`
 
 - Pr"the probability of" and
 - "|" is read as "given" or "conditional upon."
-- NOT the probability of H0 being true.
+- NOT the probability of H<sub>0</sub> being true.
 
 ## P-value and type I error
 
@@ -58,7 +58,7 @@ Significance level is sometimes defined as <strong>the probability we have a typ
 
 <strong>But!</strong> That’s only when there’s a t-test and all of the assumptions hold, and the research was perfect. Only in that case, the probability of a type I error will be exactly equal to α.<p />
 
-The reason? p-value is calculated based on the assumption Ho is correct <code>Pr(data|Ho)</code>. So, the p-value can’t be used to prove that Ha is true.<p />
+The reason? p-value is calculated based on the assumption H<sub>0</sub> is correct Pr(data|H<sub>0</sub>). So, the p-value can’t be used to prove that H<sub>a</sub> is true.<p />
 
 Therefore, we don’t know that “there’s only a 5% chance that a Type I error has occurred”<p />
 
@@ -402,7 +402,8 @@ plotDist("pois",
 
 - Used for continuous (interval) variables
 
-- Goal: Calculating area under the curve
+- Goal: Calcu_stats-notes-final-exam.md'
+g area under the curve
 
 Is:
 
@@ -528,6 +529,8 @@ Define Xbar
 mean is
 variance is Σ (sigma)^2 / n
 
+#######################################################################
+
 # 6. TODO: Point estimates
 
 `x̅ point estimate of µ (population mean) - Ṕ`
@@ -559,51 +562,252 @@ TODO:
 - Actual population mean (µ) would have CI 95 of these intervals
 - Chance of not including value of µ is only 5%
 
-## 6.
+<!-- _______________________________________
 
-If Xbar is = point definition of
+  ### How to know if a sample is unusual enough to reject H<sub>0</sub>
 
-If asked for error
+  There are three related ways for doing this:
+  - confidence interval approach
+  - Critical value method (not used much)
+  - P value
 
-error is Σ (sigma) / square root of n
+  ### Other terms
+
+  - Confidence Interval (normally 95%) - How confident we are that if we re-sampled the population, we would get same results
+  - s = sample standard deviation
+
+  ## Approaches
+
+  ## Critical value Approach
+  - Dont know Pop standard deviation ( σ)
+  - Use t-dist
+
+  ```R
+  > qt(0.05,130-1,lower.tail = TRUE)
+  [1] -1.66
+  This means the t*mean sits 1.66 SEs below the population mean of 37. We can write a short R program to convert this back to a critical mean.
+
+  > t<-qt(0.05,130-1,lower.tail = TRUE) #save t-crit
+  > mu <- 37 #Assign mu
+  > s <- sd(Body_temp$Body_temp) #Assign sd
+  > n <-length(Body_temp$Body_temp) #Assign n
+  > se <-s/sqrt(n) #Calculate se
+  > mu + (t*se) #Determine critical mean
+  [1] 36.94079988
+  ```
 
 
-P^ hat
+
+  _______________________________________
+
+  ## 6.
+
+  If Xbar is = point definition of
+
+  If asked for error
+
+  error is Σ (sigma) / square root of n
 
 
-## Confidence level
+  P^ hat
 
-Significance level alpha
 
-TODO copy formula here
+  ## Confidence level
 
-This is when we might use T
+  Significance level alpha
 
-If use T, we replace Σ (sigma) with S
+  TODO copy formula here
 
-Every time I change the formula
-My confidence interval keeps changing
+  This is when we might use T
 
-If I increase size of sample
-Σ (sigma) divided by square root of n
-Confidence interval shrinks
+  If use T, we replace Σ (sigma) with S
 
-mean becomes closer to actual mu
-becomes more accurate
+  Every time I change the formula
+  My confidence interval keeps changing
 
-If I increase the level of my confidence
+  If I increase size of sample
+  Σ (sigma) divided by square root of n
+  Confidence interval shrinks
 
-If I want a higher level of confidence
-then alpha is 1%.
+  mean becomes closer to actual mu
+  becomes more accurate
 
-Then
+  If I increase the level of my confidence
 
-## Confidence interval for proportion
+  If I want a higher level of confidence
+  then alpha is 1%.
 
-When sample size large, always normal distribution so use z
+  Then
+
+  ## Confidence interval for proportion
+
+  When sample size large, always normal distribution so use z
+
+  --------------------------------------------
+  ADD this from section 6
+
+  ## Confidence Intervals
+  ## Module 6 - Estimating Uncertainty Confidently
+
+  Menu
+  - Confidence intervals population known
+  - Confidence intervals population known
+  - Confidence intervals proportions
+  - Confidence intervals rates
+
+  ## tldr steps
+  1. Get sample mean
+  x̄(X̄
+  2. Do we know the Population standard deviation σ ? , or unknown, s.
+
+  1. Yes! We know pop standard deviation
+
+  They'll say standard deviation (σ) = 15 or something
+
+  ```R
+  favstats(~BFP_Brozek | Sex, data=body)
+  ```
+  > Sex min     Q1 median    Q3  max     mean       sd   n missing
+  > 1   Male 4.6 13.100  19.05 24.05 38.2 18.66000 7.348052 160       0
+  > 2 Female 0.0 12.775  18.75 25.35 45.1 19.42283 8.425499  92       0
+
+  TODO: add maths formulas here
+
+  2. Nope, don't know the population standard dev: ->
+  Then:
+  - Use t distribution
+  - get the sample standard deviation (s)
+
+  confint(t.test(~IQ, data = IQ))
+
+
+  TODO: add maths formulas here
+
+
+  For an unknown standard deviation:
+
+
+
+  Source: https://en.wikipedia.org/wiki/Confidence_interval
+  _______________________________________
+
+  Steps, Mainly From slides:
+
+  1.
+  ```R
+  favstats(~Diameter | Store, data=Pizza)
+  histogram(~Diameter | Store, data=Pizza,layout=c(1,2))
+  ```
+  > Sex min     Q1 median    Q3  max     mean       sd   n missing
+  > 1   Male 4.6 13.100  19.05 24.05 38.2 18.66000 7.348052 160       0
+  > 2 Female 0.0 12.775  18.75 25.35 45.1 19.42283 8.425499  92       0
+  Then we do
+
+  mean +- qnorm()
+
+
+  2. Mean
+  ```R
+  mean(IQ$IQ) + qnorm(0.975) * (15/sqrt(1290))
+  mean(IQ$IQ) - qnorm(0.975) * (15/sqrt(1290))
+  ```
+  3. Maybe this maths?
+  ```R
+  sd(Cars_4cylinder$Economy_highway)/sqrt(lengthCars_4cylinder$Economy_highway)
+  ```
+  4. Calculate t* critical value
+  ```R
+  qt(0.975, df = 1289)
+  ```
+  5. Grab favstats
+  ```R
+  favstats(~IQ, data = IQ)
+  ```
+  6. Confidence Interval from T Test
+  ```R
+  confint(t.test(~IQ, data = IQ))
+  ```
+  7.
+  > np(1-p) <- more here
+
+  ? Maybe
+  ```R
+  Mobilephone$SmartPhone
+    <-factor(
+      Mobilephone$SmartPhone,
+      levels=c(1,2,3),
+      labels=c("Cell, smartphone", "Cell, not a smartphone","No cell"))
+  tally(~SmartPhone, data=Mobilephone, margins = TRUE)
+  tally(~SmartPhone, data=Mobilephone, margins = TRUE, format = "proportion")
+  ```
+
+  8. some random binom and pois stuff onwards
+  ```R
+  binomial approx(44, 109, conf.level = 0.95)
+  ```
+  > pois.approximation (if lambda > 100)
+
+  ```R
+  binom.approx(6, 300, conf.level = 0.95)
+  binom.exact(6, 20, conf.level = 0.95)
+  pois.exact(56, pt = 1, conf.level = 0.95)
+  pois.approx(145, pt = 1, conf.level = 0.95)
+  ```
+
+  _______________________________________
+
+  From Class:
+  ```R
+  qt(.975,df) #calculate t* critical value
+  sd(Cars_4cylinder$Economy_highway)/sqrt(lengthCars_4cylinder$Economy_highway)
+  confint(t.test(~ Economy_highway, data = Cars_4cylinders)) #95% CI for mean
+  Mobilephone$SmartPhone <-factor(Mobilephone$SmartPhone, levels=c(1,2,3),
+                                  labels=c("Cell, smartphone", "Cell, not a smartphone","No cell"))
+  tally(~SmartPhone, data=Mobilephone, margins = TRUE)
+  tally(~SmartPhone, data=Mobilephone, margins = TRUE, format = "proportion")
+
+  binom.approx(904, 2254, conf.level = 0.95)
+  Homicide
+  pois.exact(109, pt = 1, conf.level = 0.95)
+  pois.approx(109, pt = 1, conf.level = 0.95)
+  ```
+
+  From longform
+  ```R
+  favstats(~Diameter | Store, data=Pizza)
+  qnorm(.975)
+  qt(0.975, df=125-1)
+  confint(t.test( ~ Diameter, data = subset(Pizza,subset=(Store=="Dominos"))))
+  mean of x     lower     upper     level
+   27.44208  27.23512  27.64904   0.95000
+   ggplot2 stuff here
+   binom.approx(6, 300, conf.level = 0.95)
+   binom.exact(6, 20, conf.level = 0.95)
+   pois.exact(56, pt = 1, conf.level = 0.95)
+   pois.approx(145, pt = 1, conf.level = 0.95)
+  ```
+
+
 
 # 7. TODO: Hypothesis testing
 
+## tldr
+  
+|  | **One-tail** | **Two-tail** | **Example** |
+| --- | --- | --- | --- |
+| AllofTheTings | H<sub>0</sub>: = | H<sub>0</sub>: = | Mean of group |
+|  | H<sub>a</sub>: < OR H<sub>a</sub>: > | H<sub>0</sub>: not= reason:(because < or >) |  |
+|  |  |  |  |
+|  |  |  |  |
+| One-Sample | **TODO** | **TODO** | Mean of group |
+| Two-Sample | NA (generally) | H<sub>0</sub>: μ1 -μ2 = 0.0<br /><br /> H<sub>a</sub>: μ1 -μ2 ≠ 0.0 *or* μ1 -μ2 > 0.0 *or* μ1 -μ2 < 0.0 | Mean of men and women |
+| Paired Sample | NA (generally) |  | Compare the same student when they study vs don't study |
+
+**TODO:**
+add T vs Z here
+refactor AllofTheTings
+
+  -->
 Hypothesis testing
 Null hypothesis
 Always value you have
@@ -677,15 +881,15 @@ Not for each category separately
 
 ## 7. Hypothesis testing
 
-H0
+H<sub>0</sub>
 If testing mean or proportion value
 always have equal sign to value
 Eg. mean is equal to 100
 
-Write H0 and H1
+Write H<sub>0</sub> and H1
 
 Write whether test is significance/or not
-It's significant if we reject H0
+It's significant if we reject H<sub>0</sub>
 Test is not significant when
 at level alpha = 5%
 
@@ -695,7 +899,7 @@ If not, we can always assume alpha is 5%
 ! We reject if P value is less than alpha
 If value of mu under H
 
-We reject H0 if 100 falls in Confidence something is
+We reject H<sub>0</sub> if 100 falls in Confidence something is
 
 Rejection region (not examinable)
 
@@ -728,6 +932,245 @@ This is where we're looking for if the value of something falls around zero
 ## Paired Data
 -
 
+<!--
+  ## Hypothesis Testing (TODO)
+  - language / how to report your results
+
+  ### Null Hypothesis Significance Testing (NHST)
+
+  H<sub>0</sub> : - null hypothesis
+
+  H<sub>a</sub> : - alternative
+
+  - Explain the process and logic of Null Hypothesis Significance Testing (NHST).
+  - Define one-tailed and two-tailed hypothesis testing.
+  - State and test the assumptions behind the different t-tests.
+
+  ### H<sub>0</sub> Null hypothesis
+
+  *Eg. The population mean IQ score is 100.*
+
+  H<sub>0</sub>: µ > µ0
+
+  - H<sub>0</sub>: State an assumption about the world
+  - That is bleak and uninteresting. It's the status quo. Nothing is happening.
+
+  ### H<sub>a</sub> Alternate hypothesis
+
+  *eg. The population mean IQ scores are not 100*
+
+  - H<sub>a</sub> contradicts and rejects H<sub>0</sub>
+  - Next, we state an opposing viewpoint that contradicts H0
+  - To support HA we must rule out H0 beyond a reasonable doubt
+
+  ## 1 tailed t-test
+
+  Is:
+  - evidence taken from a sample mean
+  - suggest that the population mean is different to a previously assumed value
+
+  Assumes:
+  The one-sample t-test assumes
+  - the data are normally distributed
+  - the population standard deviation is unknown
+  - BUT: Big sample means we don't need normal distribution
+
+  Do this:
+  - Determine when a one-sample t-test should be applied.
+  - Use technology to compute and interpret a `one-sample t-test`.
+
+  > How: 1. State hypothesis
+
+  ```shell
+  H0: μ = 37°C (μ is population mean)
+  HA: μ < 37°C predicting that mean body temperature will be lower
+  ```
+  (μ is population mean)
+
+  ? #### One sided test
+
+  - H<sub>0</sub>: µ > µ0
+  - H<sub>0</sub>: (mean) > (mean)0
+
+
+  ## Two-tailed test
+
+  - aka two-sided aka `non-directional hypothesis`
+
+  Notes from Lecture notes:
+
+  ```
+  p = Pr(x̄ < 36.81|μ = 37)
+  ```
+
+  > eg. for a lower, one-tailed hypothesis
+
+  All are based on significance level (α) (normally α = 0.05)
+  - what we use to judge "unusualness".
+  - minimum acceptable probability of committing a Type I Error
+
+
+  #### Two sided test ?
+  H<sub>a</sub>: µ ≠ µ0
+
+  ## P value
+
+  If P is very small
+
+  We reject H<sub>0</sub>
+
+  and then: H<sub>a</sub> is significant
+
+  ```shell
+  P-value = p = Pr(x̄ < 36.81|μ = 37)
+
+  pt(t,df=n-1)
+
+  P-value = p = Pr(t < 5.83|t = 0) + Pr(t > 5.83|t = 0)
+
+  ```
+
+  ## Samples
+
+  ## 1 sample t-test (TODO)
+  - maths
+  - in R
+  - Body temp example
+
+  The `one-sample t-test` is used to test whether there is evidence taken from a sample mean to suggest that the population mean is different to a previously assumed value.
+
+  The one-sample t-test assumes
+  - the data are normally distributed and
+  - the population standard deviation is unknown.
+
+  If you have a large sample, the normality assumption is not generally needed (see CLT in Module 5).
+
+
+  ## Two-sample t-tests
+  - Body Temperatures example pt2
+
+  - 1.4.1 Testing the Assumption of Normality
+  - 1.4.2 Central Limit Theorem
+  - 1.4.3 Homogeneity of Variance
+
+  _______________________________________
+
+  Notes from class while trying to do ass3
+
+  ## from class: divide mean or something by square root of
+
+  From class notes
+  ```R
+  Body_temp$Gender <- factor(Body_temp$Gender, levels = c(1,2),
+                                 labels = c("Male","Female")) #Assign correct labels
+  favstats(~ Body_temp | Gender,data = Body_temp)
+  ```
+    Gender  min   Q1 median   Q3  max   mean      sd  n missing
+  1   Male 35.7 36.4   36.7 37.0 37.5 36.726 0.38822 65       0
+  2 Female 35.8 36.7   36.9 37.1 38.2 36.889 0.41274 65       0
+
+  ```R
+  library(car)
+  Body_temp_male <- subset(Body_temp,subset=Gender =="Male") #Subset male data
+  qqPlot(Body_temp_male$Body_temp, dist="norm")
+  leveneTest(Body_temp ~ Gender, data = Body_temp)
+  ```
+  > Levene's Test for Homogeneity of Variance (center = median)
+  >        Df F value Pr(>F)
+  > group   1    0.04   0.84
+  >       128  
+
+  ```R      
+  t.test(Body_temp ~ Gender, data = Body_temp,
+           var.equal=TRUE,
+           alternative="two.sided")
+  ```
+   Two Sample t-test
+
+  ```
+  data:  Body_temp by Gender
+  t = -2.32, df = 128, p-value = 0.022
+  alternative hypothesis: true difference in means is not equal to 0
+  95 percent confidence interval:
+   -0.302140 -0.024014
+  sample estimates:
+    mean in group Male mean in group Female
+                36.726               36.889
+  ```
+  _Write down your null and alternative hypothesis clearly, express your conclusion in words and provide your reason(s) for your final conclusion._
+
+  ### null hypothesis
+
+  > H<sub>a</sub> : μ male === μ female
+
+  There is no difference between the mean bodyfat for males and females
+
+  ### alternative hypothesis
+
+  > H<sub>a</sub> : µ ≠ µ0
+
+  Males mean body fat is ≠ (not equal to) females mean body fat
+
+  ### Conclusion
+
+  Females have a higher body mean body fat than males using both the Brozek and Siri equations
+
+  ### Reasons
+  TODO:
+  - Females have a min of 0
+  -
+  -
+
+  ```R
+  ## qnorm(body)
+  favstats(~BFP_Brozek, data = body, groups = Sex)
+
+  ```
+
+  ```R
+  subset(body, Sex == "male")$BFP_Brozek %>% mean() < subset(body, Sex == "female")$BFP_Brozek %>% mean()
+
+  body_fat_male <-
+    subset(x = body,
+           select = BFP_Brozek,
+      subset= (Sex =="male")) #Subset male data
+
+  qqPlot(~ BFP_Brozek | Sex, dist="norm", data=body)
+  qqPlot(body_fat_male, dist="norm")
+
+  body_fat_male <-
+    subset(
+      body,
+      subset=Sex=="Male") #Subset male data
+  body_fat_male
+  qqPlot(body_fat_male$Sex, dist="norm")
+
+    leveneTest(body ~ Sex, data = body)
+  ## leveneTest(Pulses ~ Brand, data = Battery_sub)
+
+   leveneTest(BFP_Brozek, data = body)
+    
+  t.test(~BFP_Brozek | Sex, data = body)
+  ```
+
+  ______________________________________________________________________
+
+  ## Paired sample t-tests
+
+  - Identify and distinguish between the two-sample and paired sample research designs for continuous variables.
+  - Use technology to compute a two-sample (independent samples) t-test and paired-samples (dependent samples) t-test.
+  - Interpret a `two-sample` and `paired-samples t-test`.
+
+  ## Two-sample t-test - Assuming Equal Variance
+  ## Two-sample t-test - Assuming Unequal Variance
+
+  ## Example writeups
+  - Paired Samples t-test
+  - Paired Samples t-test Visualisation
+  - Example Write-up again?
+
+  _______________________________________
+ -->
 # 8 Chi Squared test
 
 ## Goodness of fit
@@ -843,9 +1286,9 @@ Goodness of time
 
 categorical variables
 
-H0 P black = 20 p blue = 30% P yellow = 50%
+H<sub>0</sub> P black = 20 p blue = 30% P yellow = 50%
 
-Ha the above is not what is given under h0
+H<sub>a</sub> the above is not what is given under h0
 
 Use chi squared test
 
@@ -876,6 +1319,8 @@ Expected value = n(
 
 # 9. TODO: Regression, y = ɑ + ɓx
 
+
+
 Test for a significant relationship between y and x
 Null: no relationship
 Alternate: is a relationship
@@ -901,7 +1346,7 @@ y = alpha (intercept) + B(slope)X
 
 Testing if there's a significant relationship between Y and X
 
-H0: there is no significant relation
+H<sub>0</sub>: there is no significant relation
 HA: there is a signifcant relationship
 
 Something about looking for P value
