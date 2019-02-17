@@ -1,5 +1,11 @@
 *.gem
 *.rbc
+
+source/**/*.mp3
+source/**/*.mp4
+source/**/*.mov
+source/**/*.m3u
+
 .bundle
 .config
 coverage
@@ -16,11 +22,6 @@ build/
 .cache
 .vagrant
 .sass-cache
-
-**/*.mp3
-**/*.mp4
-**/*.mov
-**/*.m3u
 
 # YARD artifacts
 .yardoc
