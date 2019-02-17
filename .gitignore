@@ -17,6 +17,11 @@ build/
 .vagrant
 .sass-cache
 
+**/*.mp3
+**/*.mp4
+**/*.mov
+**/*.m3u
+
 # YARD artifacts
 .yardoc
 _yardoc
