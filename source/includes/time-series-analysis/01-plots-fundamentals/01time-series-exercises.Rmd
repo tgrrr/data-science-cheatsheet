@@ -1,0 +1,9 @@
+time series exercises, week1
+
+```{r}
+
+install.package("TSA")
+
+
+
+```
